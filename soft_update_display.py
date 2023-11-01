@@ -1,3 +1,6 @@
+# Michael Dodge II
+# ME 482: Senior Design Project (Fall 2023)
+# Team Lava
 from datetime import datetime, timedelta
 from papirus import PapirusComposite
 
