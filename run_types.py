@@ -36,12 +36,12 @@ class TerseRunData:
     def __init__(
             self,
             time,
-            viscosity__cPs,
-            temperature__K,
+            viscosity_calculated,
+            temperature_calculated,
             gps_lat,
             gps_long):
         self.time = time,
-        self.viscosity__cPs = viscosity__cPs
-        self.temperature__K = temperature__K
-        self.gps_lat = gps_lat
+        self.viscosity_calculated = viscosity_calculated,
+        self.temperature_calculated = temperature_calculated,
+        self.gps_lat = gps_lat,
         self.gps_long = gps_long
