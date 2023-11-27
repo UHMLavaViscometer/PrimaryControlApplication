@@ -4,9 +4,9 @@
 import csv
 from datetime import datetime
 from run_types import VerboseRunData, TerseRunData
-from typing import Union
+from typing import Union, Literal
 
-def write_run_to_csv(mode: str, data: Union[list[VerboseRunData], list[TerseRunData]], base_dir: str) -> str:
+def write_run_to_csv(mode: Literal["verbose", "terse"], data: Union[list[VerboseRunData], list[TerseRunData]], base_dir: str) -> str:
     """Writes an experiment run to a CSV on the local filesystem.\n
     It names the file using ISO 8601 conventions.\n
     Example: viscometer_2023-11-01T13:19:02.csv"""
@@ -67,4 +67,6 @@ def write_run_to_csv(mode: str, data: Union[list[VerboseRunData], list[TerseRunD
                     'GPS Lat [deg.deci]': datapoint.gps_lat,
                     'GPS Long [deg.deci]': datapoint.gps_long
                 })
+    if mode is not "verbose" and mode is not "terse":
+        raise ValueError("Invalid mode selected for CSV writer")
     return filename
