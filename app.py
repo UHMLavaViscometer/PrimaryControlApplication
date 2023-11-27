@@ -16,6 +16,7 @@ text = PapirusText()
 ser = Serial('/dev/ttyACM0', 38400)
 
 current_run_data: list(VerboseRunData) = []
+current_terse_run_data: list(TerseRunData) = []
 experiment_is_running = False
 
 while True:
@@ -73,9 +74,20 @@ while True:
             torque_calculated = torque_calculated,
             viscosity_calculated = viscosity_calculated,
             temperature_raw_10bit = current_line_data['temperature_raw_10bit'],
-            temperature_calculated = temperature_calculated
+            temperature_calculated = temperature_calculated,
+            gps_lat = "to_be_implemented",
+            gps_long = "to_be_implemented"
         )
         current_run_data.append(current_line_VerboseRunData)
+
+        current_line_TerseRunData = TerseRunData(
+            time = current_line_data["time_since_power_on__ms"],
+            viscosity_calculated = viscosity_calculated,
+            temperature_calculated = temperature_calculated,
+            gps_lat = "to_be_implemented",
+            gps_long = "to_be_implemented"
+        )
+        current_terse_run_data.append(current_line_TerseRunData)
 
     # Print the JSON object to the console
     print(current_line_data)
