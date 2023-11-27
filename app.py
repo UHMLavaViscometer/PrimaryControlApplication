@@ -97,7 +97,7 @@ while True:
     # if the red button is pressed, stop logging data and write data
     if current_line_data["red_button_is_pressed"]:
         experiment_is_running = False
-        write_run_to_csv("verbose", VerboseRunData, "/dev/sda1")
+        write_run_to_csv(mode="verbose", data=VerboseRunData, base_dir="/dev/sda1")
 
     # if the green button is pressed and a run isn't currently in progress, start
     if experiment_is_running is False and current_line_data["green_button_is_pressed"]:
