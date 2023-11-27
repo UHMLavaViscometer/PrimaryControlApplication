@@ -8,6 +8,7 @@ from papirus import PapirusText # For controlling the e-ink display
 from serial import Serial # For communicating with the Arduino
 from run_types import VerboseRunData, TerseRunData
 from viscometer_equations import computeTorqueFrom10Bit, computeViscosityFromTorque, computeTemperatureFrom10Bit
+from write_run_to_csv import write_run_to_csv
 
 # Set up the PapirusText object
 text = PapirusText()
@@ -93,9 +94,10 @@ while True:
     print(current_line_data)
 
 
-    # if the red button is pressed, stop logging data
+    # if the red button is pressed, stop logging data and write data
     if current_line_data["red_button_is_pressed"]:
         experiment_is_running = False
+        write_run_to_csv("verbose", VerboseRunData, "/dev/sda1")
 
     # if the green button is pressed and a run isn't currently in progress, start
     if experiment_is_running is False and current_line_data["green_button_is_pressed"]:
