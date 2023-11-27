@@ -12,8 +12,9 @@ def make_content(run_data: dict) -> PapirusComposite:
     * Temperature [K]
     * GPS Coordinates [xx.xxxx, yy.yyyy]"""
     try: 
-        # placeholder, this will be where the composite is made
-        print("test")
+        screen_content = PapirusComposite(False, rotation = 270)
+        screen_content.AddText(f"Time: {run_data['time_since_power_on__ms']}", 5, 5)
+        screen_content.AddText(f"Torque (10 bit): {run_data['torque_raw_10bit']}", 5, 30)
     except Exception as e:
         screen_content = PapirusComposite(False, rotation = 270)
         screen_content.AddText("Something went wrong.", 5, 5)
