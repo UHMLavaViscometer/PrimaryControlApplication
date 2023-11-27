@@ -35,11 +35,11 @@ class TerseRunData:
     """Contains the necessary variables of the run, intended for typical analysis."""
     def __init__(
             self,
-            time,
-            viscosity_calculated,
-            temperature_calculated,
-            gps_lat,
-            gps_long):
+            time: int,
+            viscosity_calculated: float,
+            temperature_calculated: float,
+            gps_lat: str,
+            gps_long: str):
         self.time = time,
         self.viscosity_calculated = viscosity_calculated,
         self.temperature_calculated = temperature_calculated,
