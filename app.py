@@ -110,7 +110,7 @@ while True:
         time_since_last_update = datetime.now()
         with open(f"/tmp/viscometer_data_{current_line_data['polling_cycles']}.json", 'w') as file:
             json.dump(current_line_data, file)
-        subprocess.Popen(f"python3 ./soft_update_display.py /tmp/viscometer_data_{current_line_data['polling_cycles']}.json")
+        subprocess.Popen(["python3", "./soft_update_display.py", f"/tmp/viscometer_data_{current_line_data['polling_cycles']}.json"])
 
 
     ### End semi-cursed implementation of asynchronous display updating ###
