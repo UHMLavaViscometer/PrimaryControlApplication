@@ -59,7 +59,7 @@ while True:
     # Compute values and append the line to the current run data
     if experiment_is_running:
         # Calculate torque
-        torque_calculated = computeTorqueFrom10Bit(current_line_data['torque_raw__10bit'])
+        torque_calculated = computeTorqueFrom10Bit(current_line_data['torque_raw_10bit'])
         
         # Calculate viscosity
         viscosity_calculated = computeViscosityFromTorque(torque_calculated)
