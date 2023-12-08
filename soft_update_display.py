@@ -18,5 +18,5 @@ def soft_update_display(line_data_location: str):
         print(e)
 
     
-if __name__ == "main":
+if __name__ == "__main__":
     soft_update_display(sys.argv[1])
