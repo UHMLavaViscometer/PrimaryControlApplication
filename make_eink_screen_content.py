@@ -16,7 +16,7 @@ def make_content(run_data: dict) -> PapirusComposite:
         screen_content.AddText(f"Torque (10 bit): {run_data['torque_raw_10bit']}", 5, 30)
         return screen_content
     except Exception as e:
-        screen_content = PapirusComposite(False, rotation = 270)
+        screen_content = PapirusComposite(False, rotation = 0)
         screen_content.AddText("Something went wrong.", 5, 5)
         screen_content.AddText("Please restart the viscometer.", 5, 30)
         print(e)
