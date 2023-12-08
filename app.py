@@ -68,14 +68,16 @@ while True:
     # Compute values and append the line to the current run data
     if experiment_is_running:
         # Calculate torque
-        torque_calculated = computeTorqueFrom10Bit(current_line_data['torque_raw_10bit'])
+        try:
+            torque_calculated = computeTorqueFrom10Bit(current_line_data['torque_raw_10bit'])
         
         # Calculate viscosity
-        viscosity_calculated = computeViscosityFromTorque(torque_calculated, 'newtonian')
+            viscosity_calculated = computeViscosityFromTorque(torque_calculated, 'newtonian')
 
         # Calculate temperature
-        temperature_calculated = computeTemperatureFrom10Bit(current_line_data['temperature_raw_10bit'])
-
+            temperature_calculated = computeTemperatureFrom10Bit(current_line_data['temperature_raw_10bit'])
+        except:
+            print("An error occured while computing data.")
         # Create a VerboseRunData object
         current_line_VerboseRunData = VerboseRunData(
             cycles = current_line_data['polling_cycles'],
