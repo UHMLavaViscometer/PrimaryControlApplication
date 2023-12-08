@@ -2,7 +2,6 @@
 # ME 482: Senior Design Project (Fall 2023)
 # Team Lava
 from papirus import PapirusComposite
-import matplotlib as mp
 
 def make_content(run_data: dict) -> PapirusComposite:
     """Produce a viscosity graph (and maybe others) and list some key values.
