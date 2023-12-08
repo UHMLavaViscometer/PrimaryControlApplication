@@ -24,8 +24,8 @@ current_terse_run_data: list[TerseRunData] = []
 experiment_is_running = False
 time_since_last_update = datetime.now()
 
-PapirusText.write("Viscometer starting...")
-PapirusText.write("")
+text.write("Viscometer starting...")
+text.write("")
 
 
 while True:
