@@ -9,6 +9,8 @@ from serial import Serial # For communicating with the Arduino
 from run_types import VerboseRunData, TerseRunData
 from viscometer_equations import computeTorqueFrom10Bit, computeViscosityFromTorque, computeTemperatureFrom10Bit
 from write_run_to_csv import write_run_to_csv
+from make_eink_screen_content import make_content
+from soft_update_display import soft_update_display
 
 # Set up the PapirusText object
 text = PapirusText()
@@ -19,6 +21,7 @@ ser = Serial('/dev/ttyACM0', 38400)
 current_run_data: list(VerboseRunData) = []
 current_terse_run_data: list(TerseRunData) = []
 experiment_is_running = False
+time_since_last_update = 0.0
 
 while True:
     # Read the JSON object that the Arduino sends.
@@ -92,6 +95,9 @@ while True:
 
     # Print the JSON object to the console
     print(current_line_data)
+
+    eink_content = make_content(current_line_data)
+    time_since_last_update = soft_update_display(time_since_last_update, eink_content)
 
 
     # if the red button is pressed, stop logging data and write data
