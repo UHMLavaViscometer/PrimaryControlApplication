@@ -24,7 +24,7 @@ current_terse_run_data: list[TerseRunData] = []
 experiment_is_running = False
 time_since_last_update = datetime.now()
 
-text.write("Viscometer starting...")
+# Clear e-ink display
 text.write("")
 
 
