@@ -18,8 +18,8 @@ text = PapirusText()
 # Set up the Serial object
 ser = Serial('/dev/ttyACM0', 38400)
 
-current_run_data: list(VerboseRunData) = []
-current_terse_run_data: list(TerseRunData) = []
+current_run_data: list[VerboseRunData] = []
+current_terse_run_data: list[TerseRunData] = []
 experiment_is_running = False
 time_since_last_update = 0.0
 
