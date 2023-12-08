@@ -110,12 +110,11 @@ while True:
     #time_since_last_update = soft_update_display(time_since_last_update, eink_content)
     # write current_line_data to a file, where it can be read by soft_update_display.py
     # the file name/location will be /tmp/viscometer_data_x.json where x is the cycle number
-    if datetime.now() - time_since_last_update > timedelta(seconds=1):
+    if datetime.now() - time_since_last_update > timedelta(seconds=1.2):
         time_since_last_update = datetime.now()
         with open(f"/tmp/viscometer_data_{current_line_data['polling_cycles']}.json", 'w') as file:
             json.dump(current_line_data, file)
         subprocess.Popen(["python3", "./soft_update_display.py", f"/tmp/viscometer_data_{current_line_data['polling_cycles']}.json"])
-
 
     ### End semi-cursed implementation of asynchronous display updating ###
 
