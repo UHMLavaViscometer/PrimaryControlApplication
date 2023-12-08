@@ -68,16 +68,14 @@ while True:
     # Compute values and append the line to the current run data
     if experiment_is_running:
         # Calculate torque
-        try:
-            torque_calculated = computeTorqueFrom10Bit(current_line_data['torque_raw_10bit'])
+        torque_calculated = computeTorqueFrom10Bit(current_line_data['torque_raw_10bit'])
         
         # Calculate viscosity
-            viscosity_calculated = computeViscosityFromTorque(torque_calculated, 'newtonian')
+        viscosity_calculated = computeViscosityFromTorque(torque_calculated, 'newtonian')
 
         # Calculate temperature
-            temperature_calculated = computeTemperatureFrom10Bit(current_line_data['temperature_raw_10bit'])
-        except:
-            print("An error occured while computing data.")
+        temperature_calculated = computeTemperatureFrom10Bit(current_line_data['temperature_raw_10bit'])
+
         # Create a VerboseRunData object
         current_line_VerboseRunData = VerboseRunData(
             cycles = current_line_data['polling_cycles'],
@@ -129,13 +127,11 @@ while True:
         except Exception as e:
             print("Unable to write file to flash drive. Is it plugged in?")
             print(e)
-        text.write("Run stopped.\n")
 
     # if the green button is pressed and a run isn't currently in progress, start
     if experiment_is_running is False and current_line_data["green_button_is_pressed"]:
         experiment_is_running = True
         experiment_start_time = datetime.now()
-        text.write("")
 
 
     # if the shutdown button is pressed, signal to the operating system to shut down.
