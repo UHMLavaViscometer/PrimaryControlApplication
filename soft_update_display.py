@@ -13,6 +13,6 @@ def soft_update_display(time_since_last_update: datetime, content: PapirusCompos
     
     # otherwise, update the display
     # and return the current time
-    content.writeAll()
+    content.WriteAll()
     return datetime.now()
     
