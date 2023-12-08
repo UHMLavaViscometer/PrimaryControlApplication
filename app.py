@@ -3,7 +3,7 @@
 # Team Lava
 import os # For shutting down the Raspberry Pi
 import json # For parsing the JSON data from the Arduino
-import datetime # For adding timestamps
+from datetime import datetime # For adding timestamps
 from papirus import PapirusText # For controlling the e-ink display
 from serial import Serial # For communicating with the Arduino
 from run_types import VerboseRunData, TerseRunData
@@ -21,7 +21,7 @@ ser = Serial('/dev/ttyACM0', 38400)
 current_run_data: list[VerboseRunData] = []
 current_terse_run_data: list[TerseRunData] = []
 experiment_is_running = False
-time_since_last_update = 0.0
+time_since_last_update = datetime.now()
 
 while True:
     # Read the JSON object that the Arduino sends.
