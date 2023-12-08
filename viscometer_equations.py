@@ -1,7 +1,7 @@
 # Michael Dodge II
 # ME 482: Senior Design Project (Fall 2023)
 # Team Lava
-import numpy
+import numpy as np
 from typing import Literal
 
 def computeTorqueFrom10Bit(torque_10bit: int) -> float:
