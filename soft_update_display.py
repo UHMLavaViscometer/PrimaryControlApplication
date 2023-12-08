@@ -12,7 +12,7 @@ def soft_update_display(line_data_location: str):
     
     try:
         eink_content = make_content(current_line_data)
-        eink_content.WriteAll()
+        eink_content.WriteAll(partialUpdate=True)
     except Exception as e:
         print("Something went wrong with the display update:")
         print(e)

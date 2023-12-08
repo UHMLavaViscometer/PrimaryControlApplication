@@ -24,6 +24,10 @@ current_terse_run_data: list[TerseRunData] = []
 experiment_is_running = False
 time_since_last_update = datetime.now()
 
+PapirusText.write("Viscometer starting...")
+PapirusText.write("")
+
+
 while True:
     # Read the JSON object that the Arduino sends.
     # The JSON object is a dictionary.
