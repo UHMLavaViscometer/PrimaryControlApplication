@@ -127,11 +127,13 @@ while True:
         except Exception as e:
             print("Unable to write file to flash drive. Is it plugged in?")
             print(e)
+        text.write("Run stopped.\n")
 
     # if the green button is pressed and a run isn't currently in progress, start
     if experiment_is_running is False and current_line_data["green_button_is_pressed"]:
         experiment_is_running = True
         experiment_start_time = datetime.now()
+        text.write("")
 
 
     # if the shutdown button is pressed, signal to the operating system to shut down.
