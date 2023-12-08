@@ -37,13 +37,6 @@ while True:
 
     # The Arduino sends the JSON object as utf-8 encoded bytes.
     # We need to decode the bytes into a string, then parse the string as JSON.
-
-    # Read the bytes from the serial port
-    current_line_raw: bytes = ser.readline()
-    # Decode the bytes into a string
-    current_line_decoded: str = current_line_raw.decode('utf-8')
-    # Parse the string as JSON
-    current_line_data: dict = json.loads(current_line_decoded)
     key_replacements = {
         'c': 'polling_cycles',
         't': 'time_since_power_on__ms',
@@ -53,8 +46,19 @@ while True:
         'tq': 'torque_raw_10bit',
         'tm': 'temperature_raw_10bit'
         }
-    temp = {key_replacements.get(k, k): v for k, v in current_line_data.items()}
-    current_line_data = temp
+    # Read the bytes from the serial port
+    current_line_raw: bytes = ser.readline()
+    # Decode the bytes into a string
+    current_line_decoded: str = current_line_raw.decode('utf-8')
+    # Parse the string as JSON
+    try:
+        current_line_data: dict = json.loads(current_line_decoded)
+        temp = {key_replacements.get(k, k): v for k, v in current_line_data.items()}
+        current_line_data = temp
+    except:
+        print("A bad line was received from the Arduino.")
+    
+    
 
     # Compute values and append the line to the current run data
     if experiment_is_running:
