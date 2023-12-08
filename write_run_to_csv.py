@@ -15,7 +15,7 @@ def write_run_to_csv(mode: Literal["verbose", "terse"], data: Union[list[Verbose
     timestamp: str = datetime.now().replace(microsecond=0).isoformat()
     filename: str = f"{base_dir}/viscometer_{timestamp}"
 
-    if mode is "verbose":
+    if mode == "verbose":
         with open(filename, 'w', newline='') as csvfile:
             fieldnames = [
                 'Arduino Cycles Since Power-on', 
@@ -48,7 +48,7 @@ def write_run_to_csv(mode: Literal["verbose", "terse"], data: Union[list[Verbose
                     'GPS Latitude [deg.deci]': datapoint.gps_lat,
                     'GPS Longitude [deg.deci]': datapoint.gps_long 
                 })
-    if mode is "terse":
+    if mode == "terse":
         with open(filename, 'w', newline='') as csvfile:
             fieldnames =[
                 'Time [ms]',
@@ -67,6 +67,6 @@ def write_run_to_csv(mode: Literal["verbose", "terse"], data: Union[list[Verbose
                     'GPS Lat [deg.deci]': datapoint.gps_lat,
                     'GPS Long [deg.deci]': datapoint.gps_long
                 })
-    if mode is not "verbose" and mode is not "terse":
+    if mode != "verbose" and mode is not "terse":
         raise ValueError("Invalid mode selected for CSV writer")
     return filename
