@@ -1,18 +1,22 @@
 # Michael Dodge II
 # ME 482: Senior Design Project (Fall 2023)
 # Team Lava
-from datetime import datetime, timedelta
 from papirus import PapirusComposite
+from make_eink_screen_content import make_content
+import json, sys
 
-def soft_update_display(time_since_last_update: datetime, content: PapirusComposite) -> datetime:
-    """Write a composite image to the display if it has been at least 0.5 seconds since time_since_last_update."""
+def soft_update_display(line_data_location: str):
+    # open the file at line_data_location and parse it as json into a dict
+    with open(line_data_location, 'r') as file:
+        current_line_data = json.load(file)
+    
+    try:
+        eink_content = make_content(current_line_data)
+        eink_content.WriteAll()
+    except Exception as e:
+        print("Something went wrong with the display update:")
+        print(e)
 
-    # if the time between time_since_last_update and now is less than 0.5 seconds, just exit the function
-    if (datetime.now() - time_since_last_update) < timedelta(milliseconds=500):
-        return time_since_last_update
     
-    # otherwise, update the display
-    # and return the current time
-    content.WriteAll()
-    return datetime.now()
-    
+if __name__ == "main":
+    soft_update_display(sys.argv[1])

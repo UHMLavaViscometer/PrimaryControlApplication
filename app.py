@@ -3,9 +3,10 @@
 # Team Lava
 import os # For shutting down the Raspberry Pi
 import json # For parsing the JSON data from the Arduino
-from datetime import datetime # For adding timestamps
+from datetime import datetime, timedelta # For adding timestamps
 from papirus import PapirusText # For controlling the e-ink display
 from serial import Serial # For communicating with the Arduino
+import subprocess
 from run_types import VerboseRunData, TerseRunData
 from viscometer_equations import computeTorqueFrom10Bit, computeViscosityFromTorque, computeTemperatureFrom10Bit
 from write_run_to_csv import write_run_to_csv
@@ -100,9 +101,19 @@ while True:
     # Print the JSON object to the console
     print(current_line_data)
 
-    eink_content = make_content(current_line_data)
-    time_since_last_update = soft_update_display(time_since_last_update, eink_content)
 
+    ### Begin semi-cursed implemention of asynchronous display updating ###
+    #time_since_last_update = soft_update_display(time_since_last_update, eink_content)
+    # write current_line_data to a file, where it can be read by soft_update_display.py
+    # the file name/location will be /tmp/viscometer_data_x.json where x is the cycle number
+    if datetime.now() - time_since_last_update > timedelta(seconds=1):
+        time_since_last_update = datetime.now()
+        with open(f"/tmp/viscometer_data_{current_line_data['polling_cycles']}.json", 'w') as file:
+            json.dump(current_line_data, file)
+        subprocess.Popen(f"python3 soft_update_display.py /tmp/viscometer_data_{current_line_data['polling_cycles']}.json")
+
+
+    ### End semi-cursed implementation of asynchronous display updating ###
 
     # if the red button is pressed, stop logging data and write data
     if current_line_data["red_button_is_pressed"]:
