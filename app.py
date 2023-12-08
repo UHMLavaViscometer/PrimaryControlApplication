@@ -62,7 +62,7 @@ while True:
         torque_calculated = computeTorqueFrom10Bit(current_line_data['torque_raw_10bit'])
         
         # Calculate viscosity
-        viscosity_calculated = computeViscosityFromTorque(torque_calculated)
+        viscosity_calculated = computeViscosityFromTorque(torque_calculated, 'newtonian')
 
         # Calculate temperature
         temperature_calculated = computeTemperatureFrom10Bit(current_line_data['temperature_raw_10bit'])
