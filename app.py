@@ -122,7 +122,7 @@ while True:
     if current_line_data["red_button_is_pressed"]:
         experiment_is_running = False
         try:
-            write_run_to_csv(mode="verbose", data=VerboseRunData, base_dir="/dev/sda1")
+            write_run_to_csv(mode="verbose", data=current_run_data, base_dir="/dev/sda1")
         except Exception as e:
             print("Unable to write file to flash drive. Is it plugged in?")
             print(e)
